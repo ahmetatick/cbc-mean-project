@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Angular Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="main.js"></script>
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    />
+  </head>
+  <body>
+    <div data-ng-app="to_do_demo">
+      <div data-ng-controller="first_controller">
+        <h1>Add New To Do!</h1>
+        <form data-ng-submit="my_post(to_do_name, to_do_description, 0)">
+          <input
+            type="text"
+            placeholder="What is to do?"
+            data-ng-model="to_do_name"
+          />
+          <input
+            type="text"
+            placeholder="Explain it..."
+            data-ng-model="to_do_description"
+          />
+          <input
+            type="submit"
+            value="Add To Do!"
+          />
+        </form>
+        <hr />
+        <h1>Processing To Do's</h1>
+        <ul
+          data-ng-repeat="item in my_res"
+          data-ng-if="item.to_do_status == 0"
+        >
+          <li>
+            <b>{{item.to_do_name}}</b><span> - </span
+            ><span>{{item.to_do_description}}</span>
+            <form
+              data-ng-submit="update_status(item.to_do_name, item.to_do_description, 1)"
+            >
+              <input
+                type="submit"
+                value="Mark as Completed!"
+              />
+            </form>
+          </li>
+        </ul>
+        <hr />
+        <h1>Completed To Do's</h1>
+        <p
+          data-ng-repeat="item in my_res"
+          data-ng-if="item.to_do_status == 1"
+        >
+          <b>{{item.to_do_name}}</b><span> - </span
+          ><span>{{item.to_do_description}}</span>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
